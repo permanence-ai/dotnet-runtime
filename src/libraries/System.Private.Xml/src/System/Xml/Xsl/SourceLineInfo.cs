@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml.Xsl
 {
@@ -79,7 +80,7 @@ namespace System.Xml.Xsl
         }
 
         // Returns file path for local and network URIs. Used for PDB generating and error reporting.
-        public static string GetFileName(string uriString)
+        public static string GetFileName([StringSyntax(StringSyntaxAttribute.Uri)] string uriString)
         {
             Debug.Assert(uriString != null);
             Uri? uri;
