@@ -4,6 +4,8 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace System.Net
 {
     public delegate System.Net.AuthenticationSchemes AuthenticationSchemeSelector(System.Net.HttpListenerRequest httpRequest);
@@ -66,13 +68,13 @@ namespace System.Net
         public int Count { get { throw null; } }
         public bool IsReadOnly { get { throw null; } }
         public bool IsSynchronized { get { throw null; } }
-        public void Add(string uriPrefix) { }
+        public void Add([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix) { }
         public void Clear() { }
-        public bool Contains(string uriPrefix) { throw null; }
+        public bool Contains([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix) { throw null; }
         public void CopyTo(System.Array array, int offset) { }
         public void CopyTo(string[] array, int offset) { }
         public System.Collections.Generic.IEnumerator<string> GetEnumerator() { throw null; }
-        public bool Remove(string uriPrefix) { throw null; }
+        public bool Remove([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix) { throw null; }
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() { throw null; }
     }
     public sealed partial class HttpListenerRequest
