@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Speech.Synthesis;
 using System.Speech.Synthesis.TtsEngine;
@@ -63,7 +64,7 @@ namespace System.Speech.Internal.Synthesis
             _writer.WriteString(text);
         }
 
-        public void ProcessAudio(object voice, string uri, string baseUri, bool fIgnore)
+        public void ProcessAudio(object voice, [StringSyntax(StringSyntaxAttribute.Uri)] string uri, [StringSyntax(StringSyntaxAttribute.Uri)] string baseUri, bool fIgnore)
         {
             _writer.WriteStartElement("audio");
             _writer.WriteAttributeString("src", uri);
