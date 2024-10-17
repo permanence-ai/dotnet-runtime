@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -395,7 +396,7 @@ namespace System.Net.Tests
 
         [Theory]
         [MemberData(nameof(UrlEncodeDecode_Roundtrip_SharedTestData))]
-        public static void UrlEncodeDecodeToBytes_Roundtrip(string url)
+        public static void UrlEncodeDecodeToBytes_Roundtrip([StringSyntax(StringSyntaxAttribute.Uri)] string url)
         {
             byte[] input = Encoding.UTF8.GetBytes(url);
             byte[] encoded = WebUtility.UrlEncodeToBytes(input, 0, input.Length);
