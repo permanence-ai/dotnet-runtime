@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
 namespace System.Tests
@@ -103,7 +104,7 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Create_Uri_TestData))]
-        public void Create_Uri(string uriString1, string uriString2, UriKind uriKind, string expectedUriString)
+        public void Create_Uri([StringSyntax(StringSyntaxAttribute.Uri)] string uriString1, [StringSyntax(StringSyntaxAttribute.Uri)] string uriString2, UriKind uriKind, [StringSyntax(StringSyntaxAttribute.Uri)] string expectedUriString)
         {
             Uri baseUri = new Uri(uriString1, UriKind.Absolute);
             Uri relativeUri = new Uri(uriString2, uriKind);
