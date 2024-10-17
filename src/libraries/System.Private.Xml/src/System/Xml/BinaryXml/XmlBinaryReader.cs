@@ -197,7 +197,7 @@ namespace System.Xml
         private sealed class NamespaceDecl
         {
             public string prefix;
-            public string uri;
+            [StringSyntax(StringSyntaxAttribute.Uri)] public string uri;
             public NamespaceDecl? scopeLink;
             public NamespaceDecl? prevLink;
             public int scope;
