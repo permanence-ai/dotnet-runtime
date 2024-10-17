@@ -1,20 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+    using Configuration = System.Net.Test.Common.Configuration;
+    using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
+using Microsoft.DotNet.XUnitExtensions;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Security;
 using System.Net.Test.Common;
 using System.Security.Authentication;
 using System.Threading.Tasks;
-using Microsoft.DotNet.XUnitExtensions;
-using Xunit;
 using Xunit.Abstractions;
-
-namespace System.Net.Http.Functional.Tests
-{
-    using Configuration = System.Net.Test.Common.Configuration;
-
-#if WINHTTPHANDLER_TEST
-    using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
 #endif
 
     public abstract class HttpClientHandler_DangerousAcceptAllCertificatesValidator_Test : HttpClientHandlerTestBase
@@ -96,7 +91,7 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop]
         [ConditionalTheory(nameof(ClientSupportsDHECipherSuites))]
         [MemberData(nameof(InvalidCertificateServers))]
-        public async Task InvalidCertificateServers_CertificateValidationDisabled_Succeeds(string url)
+        public async Task InvalidCertificateServers_CertificateValidationDisabled_Succeeds([StringSyntax(StringSyntaxAttribute.Uri)] string url)
         {
             using (HttpClientHandler handler = CreateHttpClientHandler(allowAllCertificates: true))
             using (HttpClient client = CreateHttpClient(handler))
