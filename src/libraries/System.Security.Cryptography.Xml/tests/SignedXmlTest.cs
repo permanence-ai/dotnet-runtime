@@ -10,6 +10,7 @@
 // Copyright (C) 2004-2005, 2008 Novell, Inc (http://www.novell.com)
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -1210,7 +1211,7 @@ namespace System.Security.Cryptography.Xml.Tests
             0xfa, 0x75, 0x89, 0x67, 0x33, 0x01, 0xd0, 0xb0, 0x13, 0xfa, 0x11,
             0x94, 0xac, 0x02, 0x02, 0x07, 0xd0 };
 
-        public SignedXml SignHMAC(string uri, KeyedHashAlgorithm mac, bool expectedToVerify)
+        public SignedXml SignHMAC([StringSyntax(StringSyntaxAttribute.Uri)] string uri, KeyedHashAlgorithm mac, bool expectedToVerify)
         {
             string input = "<foo/>";
 
