@@ -3,11 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using Xunit;
 using Xunit.Extensions;
 
 namespace System.Security.Cryptography.Xml.Tests
@@ -168,7 +168,7 @@ namespace System.Security.Cryptography.Xml.Tests
 
         [Theory]
         [MemberData(nameof(LoadXml_CipherReference_Source))]
-        public void LoadXml_CipherReference(XmlElement xmlElement, string uri)
+        public void LoadXml_CipherReference(XmlElement xmlElement, [StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
             CipherData cipherData = new CipherData();
             cipherData.LoadXml(xmlElement);
@@ -191,7 +191,7 @@ namespace System.Security.Cryptography.Xml.Tests
             };
         }
 
-        public static object[] ToCipherReferenceXmlElement(string xml, string uri)
+        public static object[] ToCipherReferenceXmlElement([StringSyntax(StringSyntaxAttribute.Xml)] string xml, [StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(string.Format(xml, EncryptedXml.XmlEncNamespaceUrl, uri));
