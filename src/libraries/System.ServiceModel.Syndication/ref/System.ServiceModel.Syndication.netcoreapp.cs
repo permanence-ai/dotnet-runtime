@@ -4,6 +4,8 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace System.ServiceModel.Syndication
 {
     public partial class SyndicationFeed
@@ -41,7 +43,7 @@ namespace System.ServiceModel.Syndication
     {
         private object _dummy;
         private int _dummyPrimitive;
-        public XmlUriData(string uriString, System.UriKind uriKind, System.Xml.XmlQualifiedName elementQualifiedName) { throw null; }
+        public XmlUriData([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, System.UriKind uriKind, System.Xml.XmlQualifiedName elementQualifiedName) { throw null; }
         public readonly System.Xml.XmlQualifiedName ElementQualifiedName { get { throw null; } }
         public readonly System.UriKind UriKind { get { throw null; } }
         public readonly string UriString { get { throw null; } }
