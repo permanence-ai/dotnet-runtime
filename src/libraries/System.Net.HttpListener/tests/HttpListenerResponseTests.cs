@@ -1,6 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
@@ -113,7 +114,7 @@ namespace System.Net.Tests
         [InlineData(" \r \t \n", 123)]
         [InlineData("http://microsoft.com", 155)]
         [InlineData("  http://microsoft.com  ", 155)]
-        public async Task Redirect_Invoke_SetsRedirectionProperties(string url, int expectedNumberOfBytes)
+        public async Task Redirect_Invoke_SetsRedirectionProperties([StringSyntax(StringSyntaxAttribute.Uri)] string url, int expectedNumberOfBytes)
         {
             string expectedUrl = url?.Trim() ?? "";
 
