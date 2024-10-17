@@ -1,6 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Diagnostics.CodeAnalysis;
+
 using Xunit;
 
 namespace System.Diagnostics.CodeAnalysis.Tests
@@ -32,7 +34,7 @@ namespace System.Diagnostics.CodeAnalysis.Tests
         [InlineData("https://dot.net")]
         [InlineData("")]
         [InlineData(null)]
-        public void TestSetUrl(string url)
+        public void TestSetUrl([StringSyntax(StringSyntaxAttribute.Uri)] string url)
         {
             var attr = new RequiresAssemblyFilesAttribute()
             {
@@ -53,7 +55,7 @@ namespace System.Diagnostics.CodeAnalysis.Tests
         [InlineData(null, "https://dot.net")]
         [InlineData(null, "")]
         [InlineData(null, null)]
-        public void TestSetMessageAndUrl(string message, string url)
+        public void TestSetMessageAndUrl([StringSyntax(StringSyntaxAttribute.ComposeFormat)] string message, [StringSyntax(StringSyntaxAttribute.Uri)] string url)
         {
             var attr = new RequiresAssemblyFilesAttribute(message)
             {
