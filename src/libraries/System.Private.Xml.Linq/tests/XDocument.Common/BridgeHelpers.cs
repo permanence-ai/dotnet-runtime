@@ -2,14 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
-using System.Text;
-using System.Linq;
+using Microsoft.Test.ModuleCore;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XmlDiff;
-using Microsoft.Test.ModuleCore;
 using XmlCoreTest.Common;
 
 namespace CoreXml.Test.XLinq
@@ -1329,7 +1330,7 @@ namespace CoreXml.Test.XLinq
             }
         }
 
-        public CustomReader(string url, bool isFragment)
+        public CustomReader([StringSyntax(StringSyntaxAttribute.Uri)] string url, bool isFragment)
         {
             XmlReaderSettings settings = new XmlReaderSettings();
             if (!isFragment)
