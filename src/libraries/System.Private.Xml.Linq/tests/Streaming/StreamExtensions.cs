@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -206,7 +207,7 @@ namespace System.Xml.Linq
 
     public static class StreamExtensions
     {
-        public static XElement LoadStream(string uri, XName rootName, params XName[] streamNames)
+        public static XElement LoadStream([StringSyntax(StringSyntaxAttribute.Uri)] string uri, XName rootName, params XName[] streamNames)
         {
             return LoadStream(XmlReader.Create(uri, GetXmlReaderSettings()), rootName, streamNames);
         }
