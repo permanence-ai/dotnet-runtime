@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace System.PrivateUri.Tests
 
         [Theory]
         [MemberData(nameof(Uri_TestData))]
-        public static void TestCtor_BackwardSlashInPath(string uri, string expectedAbsolutePath, string expectedLocalPath, string expectedAbsoluteUri, string expectedHost)
+        public static void TestCtor_BackwardSlashInPath([StringSyntax(StringSyntaxAttribute.Uri)] string uri, [StringSyntax(StringSyntaxAttribute.Uri)] string expectedAbsolutePath, [StringSyntax(StringSyntaxAttribute.Uri)] string expectedLocalPath, [StringSyntax(StringSyntaxAttribute.Uri)] string expectedAbsoluteUri, string expectedHost)
         {
             Uri actualUri = new Uri(uri);
             Assert.Equal(expectedAbsolutePath, actualUri.AbsolutePath);
@@ -516,7 +517,7 @@ namespace System.PrivateUri.Tests
         [InlineData("http://host/path/path2/", false)]
         [InlineData("http://host/path/path2/MoreDir", false)]
         [InlineData("http://host/path/File", false)]
-        public static void TestIsBaseOf(string uriString, bool expected)
+        public static void TestIsBaseOf([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, bool expected)
         {
             Uri uri = new Uri("http://host/path/path/file?query");
             Uri uri2 = new Uri(uriString);
@@ -530,7 +531,7 @@ namespace System.PrivateUri.Tests
         [InlineData(@"c:\\directory\filename", false)]
         [InlineData("file://c:/directory/filename", false)]
         [InlineData(@"http:\\host/path/file", false)]
-        public static void TestIsWellFormedOriginalString(string uriString, bool expected)
+        public static void TestIsWellFormedOriginalString([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, bool expected)
         {
             Uri uri = new Uri(uriString);
 
@@ -829,7 +830,11 @@ namespace System.PrivateUri.Tests
 
         [Theory]
         [MemberData(nameof(FilePathHandlesNonAscii_TestData))]
-        public static void FilePathHandlesNonAscii(string uriString, string toString, string absolutePath, string absoluteUri, string localPath)
+        public static void FilePathHandlesNonAscii([StringSyntax(StringSyntaxAttribute.Uri)] string uriString,
+                                           [StringSyntax(StringSyntaxAttribute.ToString)] string toString,
+                                           [StringSyntax(StringSyntaxAttribute.Generic)] string absolutePath,
+                                           [StringSyntax(StringSyntaxAttribute.Uri)] string absoluteUri,
+                                           [StringSyntax(StringSyntaxAttribute.Generic)] string localPath)
         {
             var uri = new Uri(uriString);
 
@@ -856,7 +861,7 @@ namespace System.PrivateUri.Tests
 
         [Theory]
         [MemberData(nameof(ZeroPortIsParsedForBothKnownAndUnknownSchemes_TestData))]
-        public static void ZeroPortIsParsedForBothKnownAndUnknownSchemes(string uriString, int port, bool isDefaultPort)
+        public static void ZeroPortIsParsedForBothKnownAndUnknownSchemes([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, int port, bool isDefaultPort)
         {
             Uri.TryCreate(uriString, UriKind.Absolute, out var uri);
             Assert.Equal(port, uri.Port);
