@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml.Schema;
 
 namespace System.Xml.XmlSchemaValidatorApiTests
@@ -53,7 +54,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
         public bool IsLookupPrefixCalled = false;
 
-        public override string LookupPrefix(string uri)
+        public override string LookupPrefix([StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
             IsLookupPrefixCalled = true;
             return base.LookupPrefix(uri);
