@@ -20,7 +20,7 @@ namespace System.ServiceModel.Syndication
         {
         }
 
-        public SyndicationPerson(string email, string name, string uri)
+        public SyndicationPerson(string email, string name, [StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
             Name = name;
             Email = email;
