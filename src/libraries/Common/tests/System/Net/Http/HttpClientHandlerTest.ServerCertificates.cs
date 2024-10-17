@@ -1,8 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+    using Configuration = System.Net.Test.Common.Configuration;
+    using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
+using Microsoft.DotNet.RemoteExecutor;
+using Microsoft.DotNet.XUnitExtensions;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net.Security;
@@ -11,17 +16,7 @@ using System.Runtime.InteropServices;
 using System.Security.Authentication.ExtendedProtection;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using Microsoft.DotNet.RemoteExecutor;
-using Microsoft.DotNet.XUnitExtensions;
-using Xunit;
 using Xunit.Abstractions;
-
-namespace System.Net.Http.Functional.Tests
-{
-    using Configuration = System.Net.Test.Common.Configuration;
-
-#if WINHTTPHANDLER_TEST
-    using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
 #endif
 
     public abstract partial class HttpClientHandler_ServerCertificates_Test : HttpClientHandlerTestBase
@@ -219,7 +214,7 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop("Uses external servers")]
         [ConditionalTheory(nameof(ClientSupportsDHECipherSuites))]
         [MemberData(nameof(CertificateValidationServers))]
-        public async Task NoCallback_BadCertificate_ThrowsException(string url)
+        public async Task NoCallback_BadCertificate_ThrowsException([StringSyntax(StringSyntaxAttribute.Uri)] string url)
         {
             using (HttpClient client = CreateHttpClient())
             {
@@ -286,7 +281,7 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop("Uses external servers")]
         [Theory]
         [MemberData(nameof(CertificateValidationServersAndExpectedPolicies))]
-        public async Task UseCallback_BadCertificate_ExpectedPolicyErrors(string url, SslPolicyErrors expectedErrors)
+        public async Task UseCallback_BadCertificate_ExpectedPolicyErrors([StringSyntax(StringSyntaxAttribute.Uri)] string url, SslPolicyErrors expectedErrors)
         {
             const int SEC_E_BUFFER_TOO_SMALL = unchecked((int)0x80090321);
 
