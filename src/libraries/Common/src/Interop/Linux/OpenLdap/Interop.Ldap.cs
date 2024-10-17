@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.DirectoryServices.Protocols;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -99,7 +100,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.OpenLdap, EntryPoint = "ldap_initialize", SetLastError = true)]
-        public static partial int ldap_initialize(out IntPtr ld, [MarshalAs(UnmanagedType.LPUTF8Str)] string uri);
+        public static partial int ldap_initialize(out IntPtr ld, [StringSyntax(StringSyntaxAttribute.Uri)][MarshalAs(UnmanagedType.LPUTF8Str)] string uri);
 
         [LibraryImport(Libraries.OpenLdap, EntryPoint = "ldap_unbind_ext_s")]
         public static partial int ldap_unbind_ext_s(IntPtr ld, ref IntPtr serverctrls, ref IntPtr clientctrls);
