@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -36,7 +38,7 @@ namespace System.Runtime.Versioning.Tests
         [InlineData(null, "")]
         [InlineData("", null)]
         [InlineData("message", "https://aka.ms/preview-features/")]
-        public void Ctor_String_Url(string message, string url)
+        public void Ctor_String_Url(string message, [StringSyntax(StringSyntaxAttribute.Uri)] string url)
         {
             var attribute = new RequiresPreviewFeaturesAttribute(message) { Url = url };
             Assert.Same(message, attribute.Message);
