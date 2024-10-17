@@ -2095,7 +2095,7 @@ namespace System.Xml
                 _attributeCount++;
             }
 
-            public string? AddNamespace(string uri, XmlDictionaryString? uriDictionaryString)
+            public string? AddNamespace([StringSyntax(StringSyntaxAttribute.Uri)] string uri, XmlDictionaryString? uriDictionaryString)
             {
                 if (uri.Length == 0)
                 {
@@ -2128,7 +2128,7 @@ namespace System.Xml
                 return null;
             }
 
-            public void AddNamespaceIfNotDeclared(string prefix, string uri, XmlDictionaryString? uriDictionaryString)
+            public void AddNamespaceIfNotDeclared(string prefix, [StringSyntax(StringSyntaxAttribute.Uri)] string uri, XmlDictionaryString? uriDictionaryString)
             {
                 if (LookupNamespace(prefix) != uri)
                 {
@@ -2136,7 +2136,7 @@ namespace System.Xml
                 }
             }
 
-            public void AddNamespace(string prefix, string uri, XmlDictionaryString? uriDictionaryString)
+            public void AddNamespace(string prefix, [StringSyntax(StringSyntaxAttribute.Uri)] string uri, XmlDictionaryString? uriDictionaryString)
             {
                 if (prefix.Length >= 3)
                 {
