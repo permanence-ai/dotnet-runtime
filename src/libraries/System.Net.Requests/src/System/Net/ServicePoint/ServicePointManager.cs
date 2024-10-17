@@ -3,6 +3,7 @@
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Security;
 using System.Runtime.Versioning;
 using System.Threading;
@@ -102,7 +103,7 @@ namespace System.Net
 
         public static ServicePoint FindServicePoint(Uri address) => FindServicePoint(address, null);
 
-        public static ServicePoint FindServicePoint(string uriString, IWebProxy? proxy) => FindServicePoint(new Uri(uriString), proxy);
+        public static ServicePoint FindServicePoint([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, IWebProxy? proxy) => FindServicePoint(new Uri(uriString), proxy);
 
         public static ServicePoint FindServicePoint(Uri address, IWebProxy? proxy)
         {
