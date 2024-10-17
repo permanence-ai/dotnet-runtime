@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -815,7 +816,7 @@ namespace System.Net.Primitives.Unit.Tests
 
         [Theory]
         [MemberData(nameof(DomainCheckIgnoresVersionData))]
-        public void SetCookies_DomainCheckSuccess_IgnoresVersion(string url, string domain, int? version)
+        public void SetCookies_DomainCheckSuccess_IgnoresVersion([StringSyntax(StringSyntaxAttribute.Uri)] string url, [StringSyntax(StringSyntaxAttribute.DomainName)] string domain, int? version)
         {
             var uri = new Uri(url);
 
@@ -922,7 +923,7 @@ namespace System.Net.Primitives.Unit.Tests
 
         [Theory]
         [MemberData(nameof(DefaultPathData))]
-        public void GetCookies_DefaultPathCalculationFollowsRfc6265(string uriString, string expectedPath)
+        public void GetCookies_DefaultPathCalculationFollowsRfc6265([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, string expectedPath)
         {
             Cookie cookie = new Cookie("n", "v");
             Uri uri = new Uri(uriString);
