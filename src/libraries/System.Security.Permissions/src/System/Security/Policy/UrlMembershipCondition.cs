@@ -1,11 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace System.Security.Policy
 {
     public sealed partial class UrlMembershipCondition : ISecurityEncodable, IMembershipCondition, ISecurityPolicyEncodable
     {
-        public UrlMembershipCondition(string url) { }
+        public UrlMembershipCondition([StringSyntax(StringSyntaxAttribute.Uri)] string url) { }
         public string Url { get; set; }
         public bool Check(Evidence evidence) { return false; }
         public IMembershipCondition Copy() { return default(IMembershipCondition); }
