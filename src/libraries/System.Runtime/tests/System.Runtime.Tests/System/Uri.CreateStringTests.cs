@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Xunit;
@@ -83,7 +84,7 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(OriginalString_AbsoluteUri_ToString_TestData))]
-        public void OriginalString_AbsoluteUri_ToString(string uriString, string absoluteUri, string toString)
+        public void OriginalString_AbsoluteUri_ToString([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, [StringSyntax(StringSyntaxAttribute.Uri)] string absoluteUri, string toString)
         {
             PerformAction(uriString, UriKind.Absolute, uri =>
             {
@@ -432,7 +433,7 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Scheme_Authority_TestData))]
-        public void Scheme_Authority_Basic(string uriString, string scheme, string userInfo, string host, UriHostNameType hostNameType, int port, bool isDefaultPort, bool isLoopback)
+        public void Scheme_Authority_Basic([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, [StringSyntax(StringSyntaxAttribute.UriScheme)] string scheme, string userInfo, string host, UriHostNameType hostNameType, int port, bool isDefaultPort, bool isLoopback)
         {
             string idnHost = host;
             if (hostNameType == UriHostNameType.IPv6)
@@ -458,7 +459,7 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Scheme_Authority_IdnHost_TestData))]
-        public void Scheme_Authority_IdnHost(string uriString, string scheme, string userInfo, string host, string idnHost, string dnsSafeHost, UriHostNameType hostNameType, int port, bool isDefaultPort, bool isLoopback)
+        public void Scheme_Authority_IdnHost([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, [StringSyntax(StringSyntaxAttribute.Uri)] string scheme, [StringSyntax(StringSyntaxAttribute.Uri)] string userInfo, [StringSyntax(StringSyntaxAttribute.Uri)] string host, [StringSyntax(StringSyntaxAttribute.Uri)] string idnHost, [StringSyntax(StringSyntaxAttribute.Uri)] string dnsSafeHost, UriHostNameType hostNameType, int port, bool isDefaultPort, bool isLoopback)
         {
             string authority = host;
             if (!isDefaultPort)
@@ -804,7 +805,7 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Path_Query_Fragment_TestData))]
-        public void Path_Query_Fragment(string uriString, string path, string query, string fragment)
+        public void Path_Query_Fragment([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, [StringSyntax(StringSyntaxAttribute.UriPath)] string path, [StringSyntax(StringSyntaxAttribute.UriQuery)] string query, [StringSyntax(StringSyntaxAttribute.UriFragment)] string fragment)
         {
             IEnumerable<string> segments = null;
             string localPath = null;
@@ -961,7 +962,7 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(IsFile_IsUnc_TestData))]
-        public void IsFile_IsUnc(string uriString, bool isFile, bool isUnc)
+        public void IsFile_IsUnc([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, bool isFile, bool isUnc)
         {
             PerformAction(uriString, UriKind.Absolute, uri =>
             {
@@ -983,7 +984,7 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Relative_TestData))]
-        public void Relative(string uriString, bool relativeOrAbsolute)
+        public void Relative([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, bool relativeOrAbsolute)
         {
             PerformAction(uriString, UriKind.Relative, uri =>
             {
@@ -1244,7 +1245,7 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Create_String_Invalid_TestData))]
-        public void Create_String_Invalid(string uriString, UriKind uriKind)
+        public void Create_String_Invalid([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, UriKind uriKind)
         {
             if (uriKind == UriKind.Absolute)
             {
