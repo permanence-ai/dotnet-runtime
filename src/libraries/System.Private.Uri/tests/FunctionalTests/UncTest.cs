@@ -1,6 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Diagnostics.CodeAnalysis;
+
 using Xunit;
 
 namespace System.PrivateUri.Tests
@@ -20,7 +22,7 @@ namespace System.PrivateUri.Tests
         [InlineData(@"//host")]
         [InlineData(@"\/host")]
         [InlineData(@"/\host")]
-        public static void Uri_RecognizesUncPaths(string uriString)
+        public static void Uri_RecognizesUncPaths([StringSyntax(StringSyntaxAttribute.Uri)] string uriString)
         {
             var uri = new Uri(uriString);
             Assert.True(uri.IsUnc);
@@ -45,7 +47,7 @@ namespace System.PrivateUri.Tests
         [InlineData(@"\/host\share")]
         [InlineData(@"/\host/share")]
         [InlineData(@"/\host\share")]
-        public static void Uri_UncLocalPath_ConvertsForwardSlashes(string uriString)
+        public static void Uri_UncLocalPath_ConvertsForwardSlashes([StringSyntax(StringSyntaxAttribute.Uri)] string uriString)
         {
             var uri = new Uri(uriString);
             Assert.True(uri.IsUnc);
@@ -74,7 +76,7 @@ namespace System.PrivateUri.Tests
         [InlineData(@"/\host\foo\..\..")]
         [InlineData(@"\\host/foo/../..")]
         [InlineData(@"\\host/foo/../../")]
-        public static void Uri_UncPathEscaping_FixesOnHost(string uriString)
+        public static void Uri_UncPathEscaping_FixesOnHost([StringSyntax(StringSyntaxAttribute.Uri)] string uriString)
         {
             Uri uri = new Uri(uriString);
             Assert.True(uri.IsUnc);
@@ -105,7 +107,7 @@ namespace System.PrivateUri.Tests
         [InlineData(@"//")]
         [InlineData(@"\/")]
         [InlineData(@"/\")]
-        public static void Uri_ShortUnc_NotRecognizedAsAbsolute(string uriString)
+        public static void Uri_ShortUnc_NotRecognizedAsAbsolute([StringSyntax(StringSyntaxAttribute.Uri)] string uriString)
         {
             Assert.False(Uri.TryCreate(uriString, UriKind.Absolute, out _));
 
@@ -126,7 +128,7 @@ namespace System.PrivateUri.Tests
         [InlineData(@"\/host\share")]
         [InlineData(@"/\host/share")]
         [InlineData(@"/\host\share")]
-        public static void Uri_ImplicitToExplicitForm_StillRecognizedAsUnc(string uriString)
+        public static void Uri_ImplicitToExplicitForm_StillRecognizedAsUnc([StringSyntax(StringSyntaxAttribute.Uri)] string uriString)
         {
             var uri = new Uri(uriString);
             Assert.True(uri.IsUnc);
