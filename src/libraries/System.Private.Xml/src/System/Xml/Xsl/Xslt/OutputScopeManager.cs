@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml;
 
 namespace System.Xml.Xsl.Xslt
@@ -55,7 +56,7 @@ namespace System.Xml.Xsl.Xslt
         }
 
         // This can be ns declaration or ns exclussion. Las one when prefix == null;
-        public void AddNamespace(string prefix, string uri)
+        public void AddNamespace(string prefix, [StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
             Debug.Assert(prefix != null);
             Debug.Assert(uri != null);
