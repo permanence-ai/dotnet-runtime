@@ -1,7 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+    using Configuration = System.Net.Test.Common.Configuration;
+    using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -9,15 +12,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Xunit;
 using Xunit.Abstractions;
-
-namespace System.Net.Http.Functional.Tests
-{
-    using Configuration = System.Net.Test.Common.Configuration;
-
-#if WINHTTPHANDLER_TEST
-    using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
 #endif
 
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsBrowserDomSupportedOrNotBrowser))]
@@ -1274,7 +1269,7 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("http://httpbin.org/deflate", "\"deflated\": true")]
         [InlineData("https://httpbin.org/deflate", "\"deflated\": true")]
         [SkipOnPlatform(TestPlatforms.Browser, "AutomaticDecompression not supported on Browser")]
-        public async Task GetAsync_SetAutomaticDecompression_ContentDecompressed_Deflate(string uri, string expectedContent)
+        public async Task GetAsync_SetAutomaticDecompression_ContentDecompressed_Deflate([StringSyntax(StringSyntaxAttribute.Uri)] string uri, string expectedContent)
         {
             if (IsWinHttpHandler)
             {
