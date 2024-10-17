@@ -9,12 +9,13 @@
 // (C) 2002, 2003 Motus Technologies Inc. (http://www.motus.com)
 // (C) 2004 Novell (http://www.novell.com)
 
+using Microsoft.DotNet.XUnitExtensions;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
-using Microsoft.DotNet.XUnitExtensions;
 using Xunit;
 
 namespace System.Security.Cryptography.Xml.Tests
@@ -41,7 +42,7 @@ namespace System.Security.Cryptography.Xml.Tests
         [InlineData(" ")]
         [InlineData("uri")]
         [InlineData("http://mysite.com/")]
-        public void Ctor_Uri(string uri)
+        public void Ctor_Uri([StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
             Reference reference = new Reference(uri);
 
