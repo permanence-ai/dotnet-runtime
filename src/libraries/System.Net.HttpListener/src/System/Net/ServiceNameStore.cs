@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Security.Authentication.ExtendedProtection;
 
@@ -132,7 +133,7 @@ namespace System.Net
             }
         }
 
-        public bool Add(string uriPrefix)
+        public bool Add([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix)
         {
             Debug.Assert(!string.IsNullOrEmpty(uriPrefix));
 
@@ -161,7 +162,7 @@ namespace System.Net
             return addedAny;
         }
 
-        public bool Remove(string uriPrefix)
+        public bool Remove([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix)
         {
             Debug.Assert(!string.IsNullOrEmpty(uriPrefix));
 
@@ -252,7 +253,7 @@ namespace System.Net
             return null;
         }
 
-        public static string? BuildSimpleServiceName(string uriPrefix)
+        public static string? BuildSimpleServiceName([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix)
         {
             string? hostname = ExtractHostname(uriPrefix, false);
 
@@ -266,7 +267,7 @@ namespace System.Net
             }
         }
 
-        public static string[] BuildServiceNames(string uriPrefix)
+        public static string[] BuildServiceNames([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix)
         {
             string hostname = ExtractHostname(uriPrefix, true)!;
 
