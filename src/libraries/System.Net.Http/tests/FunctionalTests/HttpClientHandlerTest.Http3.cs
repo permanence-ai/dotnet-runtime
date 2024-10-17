@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Tracing;
 using System.Globalization;
 using System.IO;
@@ -16,7 +17,6 @@ using System.Security.Authentication;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
@@ -767,7 +767,7 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop]
         [Theory]
         [MemberData(nameof(InteropUris))]
-        public async Task Public_Interop_ExactVersion_Success(string uri)
+        public async Task Public_Interop_ExactVersion_Success([StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
             using HttpClient client = CreateHttpClient();
             using HttpRequestMessage request = new HttpRequestMessage
@@ -786,7 +786,7 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop]
         [Theory]
         [MemberData(nameof(InteropUrisWithContent))]
-        public async Task Public_Interop_ExactVersion_BufferContent_Success(string uri)
+        public async Task Public_Interop_ExactVersion_BufferContent_Success([StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
             using HttpClient client = CreateHttpClient();
             using HttpRequestMessage request = new HttpRequestMessage
@@ -808,7 +808,7 @@ namespace System.Net.Http.Functional.Tests
         [Theory]
         [OuterLoop]
         [MemberData(nameof(InteropUris))]
-        public Task Public_Interop_Upgrade_Request3OrLower_Success(string uri)
+        public Task Public_Interop_Upgrade_Request3OrLower_Success([StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
             return Public_Interop_Upgrade_Core(uri, HttpVersion.Version30, HttpVersionPolicy.RequestVersionOrLower);
         }
@@ -816,7 +816,7 @@ namespace System.Net.Http.Functional.Tests
         [Theory]
         [OuterLoop]
         [MemberData(nameof(InteropUris))]
-        public Task Public_Interop_Upgrade_Request2OrHigher_Success(string uri)
+        public Task Public_Interop_Upgrade_Request2OrHigher_Success([StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
             return Public_Interop_Upgrade_Core(uri, HttpVersion.Version20, HttpVersionPolicy.RequestVersionOrHigher);
         }
