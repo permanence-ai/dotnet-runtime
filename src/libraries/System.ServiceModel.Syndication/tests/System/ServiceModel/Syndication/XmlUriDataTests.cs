@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml;
 using Xunit;
 
@@ -30,7 +31,7 @@ namespace System.ServiceModel.Syndication.Tests
 
         [Theory]
         [MemberData(nameof(Ctor_String_UriKind_XmlQualifiedName_TestData))]
-        public void Ctor_String_UriKind_XmlQualifiedName(string uriString, UriKind uriKind, XmlQualifiedName elementQualifiedName)
+        public void Ctor_String_UriKind_XmlQualifiedName([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, UriKind uriKind, XmlQualifiedName elementQualifiedName)
         {
             var data = new XmlUriData(uriString, uriKind, elementQualifiedName);
             Assert.Equal(uriString, data.UriString);
