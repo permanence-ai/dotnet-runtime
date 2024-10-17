@@ -4,6 +4,8 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace System.Net
 {
     [System.ObsoleteAttribute("AuthenticationManager is not supported. Methods will no-op or throw PlatformNotSupportedException.", DiagnosticId="SYSLIB0009", UrlFormat="https://aka.ms/dotnet-warnings/{0}")]
@@ -505,7 +507,7 @@ namespace System.Net
         public static System.Net.SecurityProtocolType SecurityProtocol { get { throw null; } set { } }
         public static System.Net.Security.RemoteCertificateValidationCallback? ServerCertificateValidationCallback { get { throw null; } set { } }
         public static bool UseNagleAlgorithm { get { throw null; } set { } }
-        public static System.Net.ServicePoint FindServicePoint(string uriString, System.Net.IWebProxy? proxy) { throw null; }
+        public static System.Net.ServicePoint FindServicePoint([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, System.Net.IWebProxy? proxy) { throw null; }
         public static System.Net.ServicePoint FindServicePoint(System.Uri address) { throw null; }
         public static System.Net.ServicePoint FindServicePoint(System.Uri address, System.Net.IWebProxy? proxy) { throw null; }
         public static void SetTcpKeepAlive(bool enabled, int keepAliveTime, int keepAliveInterval) { }
