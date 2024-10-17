@@ -1,9 +1,11 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using Microsoft.DotNet.RemoteExecutor;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Tracing;
 using System.IO;
 using System.Linq;
@@ -11,8 +13,6 @@ using System.Net.Test.Common;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.DotNet.RemoteExecutor;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
@@ -422,7 +422,7 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop]
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         [MemberData(nameof(Redaction_MemberData))]
-        public async Task EventSource_SendingRequest_PathAndQueryRedaction_LogsStartStop(string uriTail, bool disableRedaction)
+        public async Task EventSource_SendingRequest_PathAndQueryRedaction_LogsStartStop([StringSyntax(StringSyntaxAttribute.Uri)] string uriTail, bool disableRedaction)
         {
             var psi = new ProcessStartInfo();
             psi.Environment.Add("DOTNET_SYSTEM_NET_HTTP_DISABLEURIREDACTION", disableRedaction.ToString());
@@ -929,7 +929,7 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop]
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         [MemberData(nameof(Redaction_MemberData))]
-        public async Task EventSource_Redirect_PathAndQueryRedaction_LogsRedirect(string uriTail, bool disableRedaction)
+        public async Task EventSource_Redirect_PathAndQueryRedaction_LogsRedirect([StringSyntax(StringSyntaxAttribute.Uri)] string uriTail, bool disableRedaction)
         {
             var psi = new ProcessStartInfo();
             psi.Environment.Add("DOTNET_SYSTEM_NET_HTTP_DISABLEURIREDACTION", disableRedaction.ToString());
