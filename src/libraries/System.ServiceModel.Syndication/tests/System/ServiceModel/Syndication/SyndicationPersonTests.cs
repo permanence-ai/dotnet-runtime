@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Linq;
@@ -40,7 +41,7 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData(null, null, null)]
         [InlineData("", "", "")]
         [InlineData("email", "name", "uri")]
-        public void Ctor_String_String_String(string email, string name, string uri)
+        public void Ctor_String_String_String([StringSyntax(StringSyntaxAttribute.Uri)] string uri, string email, string name)
         {
             var person = new SyndicationPerson(email, name, uri);
             Assert.Empty(person.AttributeExtensions);

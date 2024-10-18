@@ -15,12 +15,12 @@ namespace System.Security.Cryptography.Xml
             ReferenceType = "CipherReference";
         }
 
-        public CipherReference(string uri) : base(uri)
+        public CipherReference([StringSyntax(StringSyntaxAttribute.Uri)] string uri) : base(uri)
         {
             ReferenceType = "CipherReference";
         }
 
-        public CipherReference(string uri, TransformChain transformChain) : base(uri, transformChain)
+        public CipherReference([StringSyntax(StringSyntaxAttribute.Uri)] string uri, TransformChain transformChain) : base(uri, transformChain)
         {
             ReferenceType = "CipherReference";
         }

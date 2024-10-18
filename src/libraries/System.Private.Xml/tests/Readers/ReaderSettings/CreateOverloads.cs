@@ -1,9 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using OLEDB.Test.ModuleCore;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Xml.Tests;
-using OLEDB.Test.ModuleCore;
 using XmlCoreTest.Common;
 
 namespace System.Xml.ReaderSettingsTests
@@ -67,7 +68,7 @@ namespace System.Xml.ReaderSettingsTests
 
         public class ReaderDelegate
         {
-            public static bool Create(string url)
+            public static bool Create([StringSyntax(StringSyntaxAttribute.Uri)] string url)
             {
                 XmlReader reader = null;
                 try
@@ -131,7 +132,7 @@ namespace System.Xml.ReaderSettingsTests
                 }
             }
 
-            public static bool Create(string url, XmlReaderSettings settings)
+            public static bool Create([StringSyntax(StringSyntaxAttribute.Uri)] string url, XmlReaderSettings settings)
             {
                 XmlReader reader = null;
                 try
@@ -299,7 +300,7 @@ namespace System.Xml.ReaderSettingsTests
                 }
             }
 
-            public static bool Create(string url, XmlReaderSettings settings, XmlParserContext context)
+            public static bool Create([StringSyntax(StringSyntaxAttribute.Uri)] string url, XmlReaderSettings settings, XmlParserContext context)
             {
                 XmlReader reader = null;
                 try

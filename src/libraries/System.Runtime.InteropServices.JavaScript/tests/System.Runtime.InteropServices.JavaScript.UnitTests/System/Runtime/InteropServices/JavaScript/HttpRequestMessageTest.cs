@@ -2,14 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Net.Http.Headers;
-using System.Net.Http;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices.JavaScript.Tests;
 using System.Threading.Tasks;
-
-using Xunit;
 using Xunit.Abstractions;
 
 namespace System.Runtime.InteropServices.JavaScript.Http.Tests
@@ -45,7 +44,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [InlineData("http://host/absolute/")]
         [InlineData("blob:http://host/absolute/")]
         [InlineData("foo://host/absolute")]
-        public void Ctor_AbsoluteStringUri_CorrectValues(string uri)
+        public void Ctor_AbsoluteStringUri_CorrectValues([StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
             var rm = new HttpRequestMessage(HttpMethod.Post, uri);
 
@@ -82,7 +81,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [InlineData("http://host/absolute/")]
         [InlineData("blob:http://host/absolute/")]
         [InlineData("foo://host/absolute")]
-        public void Ctor_AbsoluteUri_CorrectValues(string uriData)
+        public void Ctor_AbsoluteUri_CorrectValues([StringSyntax(StringSyntaxAttribute.Uri)] string uriData)
         {
             var uri = new Uri(uriData);
             var rm = new HttpRequestMessage(HttpMethod.Post, uri);
@@ -107,7 +106,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [Theory]
         [InlineData("http://example.com")]
         [InlineData("blob:http://example.com")]
-        public void Ctor_NullMethod_ThrowsArgumentNullException(string uriData)
+        public void Ctor_NullMethod_ThrowsArgumentNullException([StringSyntax(StringSyntaxAttribute.Uri)] string uriData)
         {
             Assert.Throws<ArgumentNullException>(() => new HttpRequestMessage(null, uriData));
         }
@@ -115,7 +114,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [Theory]
         [InlineData("http://example.com")]
         [InlineData("blob:http://example.com")]
-        public void Dispose_DisposeObject_ContentGetsDisposedAndSettersWillThrowButGettersStillWork(string uriData)
+        public void Dispose_DisposeObject_ContentGetsDisposedAndSettersWillThrowButGettersStillWork([StringSyntax(StringSyntaxAttribute.Uri)] string uriData)
         {
             var rm = new HttpRequestMessage(HttpMethod.Get, uriData);
             var content = new MockContent();
@@ -141,7 +140,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [Theory]
         [InlineData("https://example.com")]
         [InlineData("blob:https://example.com")]
-        public void Properties_SetOptionsAndGetTheirValue_MatchingValues(string uriData)
+        public void Properties_SetOptionsAndGetTheirValue_MatchingValues([StringSyntax(StringSyntaxAttribute.Uri)] string uriData)
         {
             var rm = new HttpRequestMessage();
 
@@ -167,7 +166,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [Theory]
         [InlineData("https://example.com")]
         [InlineData("blob:https://example.com")]
-        public void Properties_SetOptionsAndGetTheirValue_Set_FetchOptions(string uriData)
+        public void Properties_SetOptionsAndGetTheirValue_Set_FetchOptions([StringSyntax(StringSyntaxAttribute.Uri)] string uriData)
         {
             var rm = new HttpRequestMessage();
 
@@ -209,7 +208,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [Theory]
         [InlineData("https://example.com")]
         [InlineData("blob:https://example.com")]
-        public void Properties_SetOptionsAndGetTheirValue_NotSet_FetchOptions(string uriData)
+        public void Properties_SetOptionsAndGetTheirValue_NotSet_FetchOptions([StringSyntax(StringSyntaxAttribute.Uri)] string uriData)
         {
             var rm = new HttpRequestMessage();
 
@@ -238,7 +237,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [Theory]
         [InlineData("https://example.com")]
         [InlineData("blob:https://example.com")]
-        public void Properties_SetOptionsAndGetTheirValue_Set_EnableStreamingResponse(string uriData)
+        public void Properties_SetOptionsAndGetTheirValue_Set_EnableStreamingResponse([StringSyntax(StringSyntaxAttribute.Uri)] string uriData)
         {
             var rm = new HttpRequestMessage();
 
@@ -269,7 +268,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [Theory]
         [InlineData("https://example.com")]
         [InlineData("blob:https://example.com")]
-        public void Properties_SetOptionsAndGetTheirValue_NotSet_EnableStreamingResponse(string uriData)
+        public void Properties_SetOptionsAndGetTheirValue_NotSet_EnableStreamingResponse([StringSyntax(StringSyntaxAttribute.Uri)] string uriData)
         {
             var rm = new HttpRequestMessage();
 
@@ -323,7 +322,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [Theory]
         [InlineData("http://a.com/")]
         [InlineData("blob:http://a.com/")]
-        public void ToString_NonDefaultInstanceWithNoCustomHeaders_DumpAllFields(string uriData)
+        public void ToString_NonDefaultInstanceWithNoCustomHeaders_DumpAllFields([StringSyntax(StringSyntaxAttribute.Uri)] string uriData)
         {
             var rm = new HttpRequestMessage();
             rm.Method = HttpMethod.Put;
@@ -343,7 +342,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         [Theory]
         [InlineData("http://a.com/")]
         [InlineData("blob:http://a.com/")]
-        public void ToString_NonDefaultInstanceWithCustomHeaders_DumpAllFields(string uriData)
+        public void ToString_NonDefaultInstanceWithCustomHeaders_DumpAllFields([StringSyntax(StringSyntaxAttribute.Uri)] string uriData)
         {
             var rm = new HttpRequestMessage();
             rm.Method = HttpMethod.Put;

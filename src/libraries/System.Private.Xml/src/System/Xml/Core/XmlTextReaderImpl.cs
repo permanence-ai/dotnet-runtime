@@ -558,11 +558,11 @@ namespace System.Xml
 
         // Initializes a new instance of the XmlTextReaderImpl class with the specified url and XmlNameTable.
         // This constructor is used when creating XmlTextReaderImpl for V1 XmlTextReader
-        public XmlTextReaderImpl(string url) : this(url, new NameTable())
+        public XmlTextReaderImpl([StringSyntax(StringSyntaxAttribute.Uri)] string url) : this(url, new NameTable())
         {
         }
 
-        public XmlTextReaderImpl(string url, XmlNameTable nt) : this(nt)
+        public XmlTextReaderImpl([StringSyntax(StringSyntaxAttribute.Uri)] string url, XmlNameTable nt) : this(nt)
         {
             ArgumentException.ThrowIfNullOrEmpty(url);
 

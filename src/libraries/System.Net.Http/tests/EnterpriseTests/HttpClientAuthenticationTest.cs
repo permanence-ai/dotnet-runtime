@@ -1,9 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using Microsoft.DotNet.RemoteExecutor;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Test.Common;
 using System.Threading.Tasks;
-using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
 
 namespace System.Net.Http.Enterprise.Tests
@@ -20,7 +21,7 @@ namespace System.Net.Http.Enterprise.Tests
         [InlineData(EnterpriseTestConfiguration.DigestAuthWebServer, true)]
         [InlineData(EnterpriseTestConfiguration.DigestAuthWebServer, false)]
         [InlineData(EnterpriseTestConfiguration.NtlmAuthWebServer, true)]
-        public void HttpClient_ValidAuthentication_Success(string url, bool useDomain, bool useAltPort = false)
+        public void HttpClient_ValidAuthentication_Success([StringSyntax(StringSyntaxAttribute.Uri)] string url, bool useDomain, bool useAltPort = false)
         {
             RemoteExecutor.Invoke((url, useAltPort, useDomain) =>
             {

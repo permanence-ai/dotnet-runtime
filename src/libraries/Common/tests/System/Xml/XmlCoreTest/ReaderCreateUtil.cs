@@ -10,11 +10,12 @@
 /// out to end at the buffer boundary.
 ///
 using System;
+using OLEDB.Test.ModuleCore;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using System.Xml;
-using OLEDB.Test.ModuleCore;
 
 namespace XmlCoreTest.Common
 {
@@ -156,20 +157,20 @@ namespace XmlCoreTest.Common
         }
 
         //This API attaches a default validation event handler.
-        public static XmlReader CreateReader(ReaderType readerType, string url, bool enableNormalization)
+        public static XmlReader CreateReader(ReaderType readerType, [StringSyntax(StringSyntaxAttribute.Url)] string url, bool enableNormalization)
         {
             return CreateReader(readerType.ToString(), url, enableNormalization, null, null);
         }
-        public static XmlReader CreateReader(string readerType, string url, bool enableNormalization)
+        public static XmlReader CreateReader(string readerType, [StringSyntax(StringSyntaxAttribute.Uri)] string url, bool enableNormalization)
         {
             return CreateReader(readerType, url, enableNormalization, null, null); //use default eventhandler
         }
 
-        public static XmlReader CreateReader(string readerType, string url, bool enableNormalization, object eventHndlr, XmlReaderSettings settings)
+        public static XmlReader CreateReader(string readerType, [StringSyntax(StringSyntaxAttribute.Uri)] string url, bool enableNormalization, object eventHndlr, XmlReaderSettings settings)
         {
             return CreateReader(readerType, url, enableNormalization, eventHndlr, settings, false);
         }
-        public static XmlReader CreateReader(string readerType, string url, bool enableNormalization, object eventHndlr, XmlReaderSettings settings, bool isFragment)
+        public static XmlReader CreateReader(string readerType, [StringSyntax(StringSyntaxAttribute.Uri)] string url, bool enableNormalization, object eventHndlr, XmlReaderSettings settings, bool isFragment)
         {
             CError.WriteLineIgnore(readerType);
             ReaderType type = (ReaderType)Enum.Parse(typeof(ReaderType), readerType.ToUpperInvariant());

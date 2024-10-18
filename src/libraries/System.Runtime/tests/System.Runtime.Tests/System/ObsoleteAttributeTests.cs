@@ -1,6 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Diagnostics.CodeAnalysis;
+
 using Xunit;
 
 namespace System.Tests
@@ -34,7 +36,7 @@ namespace System.Tests
         [InlineData(null, true, "")]
         [InlineData("", false, null)]
         [InlineData("message", true, "https://aka.ms/obsolete/{0}")]
-        public void Ctor_String_Bool_Url(string message, bool error, string url)
+        public void Ctor_String_Bool_Url(string message, bool error, [StringSyntax(StringSyntaxAttribute.Uri)] string url)
         {
             var attribute = new ObsoleteAttribute(message, error) { UrlFormat = url };
             Assert.Equal(message, attribute.Message);

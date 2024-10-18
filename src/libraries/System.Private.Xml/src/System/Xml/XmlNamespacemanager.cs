@@ -18,7 +18,7 @@ namespace System.Xml
             public int scopeId;
             public int previousNsIndex;
 
-            public void Set(string prefix, string uri, int scopeId, int previousNsIndex)
+            public void Set([StringSyntax(StringSyntaxAttribute.Uri)] string prefix, [StringSyntax(StringSyntaxAttribute.Uri)] string uri, int scopeId, int previousNsIndex)
             {
                 this.prefix = prefix;
                 this.uri = uri;

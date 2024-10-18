@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 using Xunit;
 
@@ -55,7 +56,17 @@ namespace System.PrivateUri.Tests
         [InlineData("http://username:password@host:90/path1/path2?query#fragment", true, "http", "username", "password", "host", 90, "/path1/path2", "?query", "#fragment")]
         [InlineData("www.host.com", false, "http", "", "", "www.host.com", 80, "/", "", "")] // Relative
         [InlineData("unknownscheme:", true, "unknownscheme", "", "", "", -1, "", "", "")] // No authority
-        public void Ctor_String(string uriString, bool createUri, string scheme, string username, string password, string host, int port, string path, string query, string fragment)
+        public void Ctor_String(
+            [StringSyntax(StringSyntaxAttribute.Uri)] string uriString,
+            bool createUri,
+            [StringSyntax(StringSyntaxAttribute.Uri)] string scheme,
+            string username,
+            string password,
+            string host,
+            int port,
+            string path,
+            string query,
+            string fragment)
         {
             var uriBuilder = new UriBuilder(uriString);
             VerifyUriBuilder(uriBuilder, scheme, username, password, host, port, path, query, fragment);

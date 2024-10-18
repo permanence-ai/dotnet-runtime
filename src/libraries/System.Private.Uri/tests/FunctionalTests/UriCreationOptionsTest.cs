@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Xunit;
 
@@ -94,7 +95,7 @@ namespace System.PrivateUri.Tests
 
         [Theory]
         [MemberData(nameof(DisableCanonicalization_TestData))]
-        public void DisableCanonicalization_IsRespected(string uriString, string expectedHost, int expectedPort, string expectedPath, string expectedQuery)
+        public void DisableCanonicalization_IsRespected([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, string expectedHost, int expectedPort, string expectedPath, string expectedQuery)
         {
             var options = new UriCreationOptions { DangerousDisablePathAndQueryCanonicalization = true };
 

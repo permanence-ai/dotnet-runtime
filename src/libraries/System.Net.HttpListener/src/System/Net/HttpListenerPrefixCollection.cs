@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace System.Net
 {
@@ -73,9 +74,9 @@ namespace System.Net
 
         public bool IsReadOnly => false;
 
-        public void Add(string uriPrefix) => _httpListener.AddPrefix(uriPrefix);
+        public void Add([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix) => _httpListener.AddPrefix(uriPrefix);
 
-        public bool Contains(string uriPrefix) => _httpListener.ContainsPrefix(uriPrefix);
+        public bool Contains([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix) => _httpListener.ContainsPrefix(uriPrefix);
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
@@ -84,7 +85,7 @@ namespace System.Net
             return new ListenerPrefixEnumerator(_httpListener.PrefixCollection.GetEnumerator());
         }
 
-        public bool Remove(string uriPrefix) => _httpListener.RemovePrefix(uriPrefix);
+        public bool Remove([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix) => _httpListener.RemovePrefix(uriPrefix);
 
         public void Clear() => _httpListener.RemoveAll(true);
     }

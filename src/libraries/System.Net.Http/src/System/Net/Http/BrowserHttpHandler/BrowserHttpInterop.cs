@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Buffers;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices.JavaScript;
 using System.Threading;
@@ -97,7 +98,7 @@ namespace System.Net.Http
             IntPtr bodyPtr,
             int bodyLength);
 
-        public static unsafe Task FetchBytes(JSObject httpController, string uri, string[] headerNames, string[] headerValues, string[] optionNames, object?[] optionValues, MemoryHandle pinBuffer, int bodyLength)
+        public static unsafe Task FetchBytes(JSObject httpController, [StringSyntax(StringSyntaxAttribute.Uri)] string uri, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string[] headerNames, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string[] headerValues, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string[] optionNames, object?[] optionValues, MemoryHandle pinBuffer, int bodyLength)
         {
             return FetchBytes(httpController, uri, headerNames, headerValues, optionNames, optionValues, (IntPtr)pinBuffer.Pointer, bodyLength);
         }

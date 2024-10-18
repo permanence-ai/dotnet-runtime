@@ -76,7 +76,7 @@ namespace System.Security.Cryptography.Xml
             get { return _outputTypes; }
         }
 
-        public void AddExceptUri(string uri)
+        public void AddExceptUri([StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
             if (uri is null)
             {

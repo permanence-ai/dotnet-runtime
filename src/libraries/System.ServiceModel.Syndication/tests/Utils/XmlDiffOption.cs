@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace System.ServiceModel.Syndication.Tests
 {
@@ -39,7 +40,7 @@ namespace System.ServiceModel.Syndication.Tests
 
         public string IgnoreChildOrderExpr { get; set; }
 
-        public void AddNamespace(string prefix, string uri) => AddedNamespaces[prefix] = uri;
+        public void AddNamespace(string prefix, [StringSyntax(StringSyntaxAttribute.Uri)] string uri) => AddedNamespaces[prefix] = uri;
 
         public bool HadAddedNamespace() => AddedNamespaces.Count != 0;
 

@@ -1,19 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+    using Configuration = System.Net.Test.Common.Configuration;
+    using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Threading.Tasks;
-
-using Xunit;
 using Xunit.Abstractions;
-
-namespace System.Net.Http.Functional.Tests
-{
-    using Configuration = System.Net.Test.Common.Configuration;
-
-#if WINHTTPHANDLER_TEST
-    using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
 #endif
 
     [PlatformSpecific(TestPlatforms.Windows)]
@@ -43,7 +37,7 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop("Uses external servers")]
         [ConditionalTheory(nameof(ServerAuthenticationTestsEnabled))]
         [MemberData(nameof(AuthenticatedServers))]
-        public async Task UseDefaultCredentials_DefaultValue_Unauthorized(string uri, bool useProxy)
+        public async Task UseDefaultCredentials_DefaultValue_Unauthorized([StringSyntax(StringSyntaxAttribute.Uri)] string uri, bool useProxy)
         {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.UseProxy = useProxy;
@@ -58,7 +52,7 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop("Uses external servers")]
         [ConditionalTheory(nameof(ServerAuthenticationTestsEnabled))]
         [MemberData(nameof(AuthenticatedServers))]
-        public async Task UseDefaultCredentials_SetFalse_Unauthorized(string uri, bool useProxy)
+        public async Task UseDefaultCredentials_SetFalse_Unauthorized([StringSyntax(StringSyntaxAttribute.Uri)] string uri, bool useProxy)
         {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.UseProxy = useProxy;
@@ -74,7 +68,7 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop("Uses external servers")]
         [ConditionalTheory(nameof(ServerAuthenticationTestsEnabled))]
         [MemberData(nameof(AuthenticatedServers))]
-        public async Task UseDefaultCredentials_SetTrue_ConnectAsCurrentIdentity(string uri, bool useProxy)
+        public async Task UseDefaultCredentials_SetTrue_ConnectAsCurrentIdentity([StringSyntax(StringSyntaxAttribute.Uri)] string uri, bool useProxy)
         {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.UseProxy = useProxy;
@@ -96,7 +90,7 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop("Uses external servers")]
         [ConditionalTheory(nameof(ServerAuthenticationTestsEnabled))]
         [MemberData(nameof(AuthenticatedServers))]
-        public async Task Credentials_SetToWrappedDefaultCredential_ConnectAsCurrentIdentity(string uri, bool useProxy)
+        public async Task Credentials_SetToWrappedDefaultCredential_ConnectAsCurrentIdentity([StringSyntax(StringSyntaxAttribute.Uri)] string uri, bool useProxy)
         {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.UseProxy = useProxy;
@@ -121,7 +115,7 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop("Uses external servers")]
         [ConditionalTheory(nameof(ServerAuthenticationTestsEnabled))]
         [MemberData(nameof(AuthenticatedServers))]
-        public async Task Credentials_SetToBadCredential_Unauthorized(string uri, bool useProxy)
+        public async Task Credentials_SetToBadCredential_Unauthorized([StringSyntax(StringSyntaxAttribute.Uri)] string uri, bool useProxy)
         {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.UseProxy = useProxy;

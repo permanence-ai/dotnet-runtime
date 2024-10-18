@@ -1,8 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.IO;
 using OLEDB.Test.ModuleCore;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using XmlCoreTest.Common;
 
 //This file loads the specified new control file and executes the variations.
@@ -369,7 +370,7 @@ namespace System.Xml.RwFactoryWriterTests
             }
         }
 
-        public CustomReader(string url, bool isFragment)
+        public CustomReader([StringSyntax(StringSyntaxAttribute.Uri)] string url, bool isFragment)
         {
             XmlReaderSettings settings = new XmlReaderSettings();
 

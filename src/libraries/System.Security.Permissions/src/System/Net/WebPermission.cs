@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.Security;
 using System.Security.Permissions;
 using System.Text.RegularExpressions;
@@ -14,12 +15,12 @@ namespace System.Net
     public sealed class WebPermission : CodeAccessPermission, IUnrestrictedPermission
     {
         public WebPermission() { }
-        public WebPermission(NetworkAccess access, string uriString) { }
+        public WebPermission(NetworkAccess access, [StringSyntax(StringSyntaxAttribute.Uri)] string uriString) { }
         public WebPermission(NetworkAccess access, Regex uriRegex) { }
         public WebPermission(PermissionState state) { }
         public IEnumerator AcceptList { get { return null; } }
         public IEnumerator ConnectList { get { return null; } }
-        public void AddPermission(NetworkAccess access, string uriString) { }
+        public void AddPermission(NetworkAccess access, [StringSyntax(StringSyntaxAttribute.Uri)] string uriString) { }
         public void AddPermission(NetworkAccess access, Regex uriRegex) { }
         public override IPermission Copy() { return null; }
         public override void FromXml(SecurityElement securityElement) { }

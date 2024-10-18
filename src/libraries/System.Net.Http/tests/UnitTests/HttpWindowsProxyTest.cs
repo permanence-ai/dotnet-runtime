@@ -1,15 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using Microsoft.DotNet.RemoteExecutor;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.WinHttpHandlerUnitTests;
 using System.Threading.Tasks;
-using Microsoft.DotNet.RemoteExecutor;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace System.Net.Http.Tests
@@ -211,7 +211,7 @@ namespace System.Net.Http.Tests
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         [MemberData(nameof(HttpProxy_Multi_Data))]
-        public async Task HttpProxy_Multi_Success(string proxyConfig, string url, string expected)
+        public async Task HttpProxy_Multi_Success(string proxyConfig, [StringSyntax(StringSyntaxAttribute.Uri)] string url, string expected)
         {
             await RemoteExecutor.Invoke((proxyConfigValue, urlValue, expectedValue) =>
             {

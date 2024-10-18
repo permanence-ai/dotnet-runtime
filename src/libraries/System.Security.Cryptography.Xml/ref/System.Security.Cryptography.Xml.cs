@@ -4,6 +4,8 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace System.Security.Cryptography.Xml
 {
     public sealed partial class CipherData
@@ -23,8 +25,8 @@ namespace System.Security.Cryptography.Xml
     public sealed partial class CipherReference : System.Security.Cryptography.Xml.EncryptedReference
     {
         public CipherReference() { }
-        public CipherReference(string uri) { }
-        public CipherReference(string uri, System.Security.Cryptography.Xml.TransformChain transformChain) { }
+        public CipherReference([StringSyntax(StringSyntaxAttribute.Uri)] string uri) { }
+        public CipherReference([StringSyntax(StringSyntaxAttribute.Uri)] string uri, System.Security.Cryptography.Xml.TransformChain transformChain) { }
         public override System.Xml.XmlElement GetXml() { throw null; }
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute("XmlDsigXsltTransform uses XslCompiledTransform which requires dynamic code.")]
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute("The algorithm implementations referenced in the XML payload might be removed. Ensure the required algorithm implementations are preserved in your application.")]
@@ -44,8 +46,8 @@ namespace System.Security.Cryptography.Xml
     public sealed partial class DataReference : System.Security.Cryptography.Xml.EncryptedReference
     {
         public DataReference() { }
-        public DataReference(string uri) { }
-        public DataReference(string uri, System.Security.Cryptography.Xml.TransformChain transformChain) { }
+        public DataReference([StringSyntax(StringSyntaxAttribute.Uri)] string uri) { }
+        public DataReference([StringSyntax(StringSyntaxAttribute.Uri)] string uri, System.Security.Cryptography.Xml.TransformChain transformChain) { }
     }
     public partial class DSAKeyValue : System.Security.Cryptography.Xml.KeyInfoClause
     {
@@ -295,8 +297,8 @@ namespace System.Security.Cryptography.Xml
     public sealed partial class KeyReference : System.Security.Cryptography.Xml.EncryptedReference
     {
         public KeyReference() { }
-        public KeyReference(string uri) { }
-        public KeyReference(string uri, System.Security.Cryptography.Xml.TransformChain transformChain) { }
+        public KeyReference([StringSyntax(StringSyntaxAttribute.Uri)] string uri) { }
+        public KeyReference([StringSyntax(StringSyntaxAttribute.Uri)] string uri, System.Security.Cryptography.Xml.TransformChain transformChain) { }
     }
     public partial class Reference
     {
@@ -478,7 +480,7 @@ namespace System.Security.Cryptography.Xml
         public System.Security.Cryptography.Xml.EncryptedXml EncryptedXml { get { throw null; } set { } }
         public override System.Type[] InputTypes { get { throw null; } }
         public override System.Type[] OutputTypes { get { throw null; } }
-        public void AddExceptUri(string uri) { }
+        public void AddExceptUri([StringSyntax(StringSyntaxAttribute.Uri)] string uri) { }
         protected override System.Xml.XmlNodeList? GetInnerXml() { throw null; }
         public override object GetOutput() { throw null; }
         public override object GetOutput(System.Type type) { throw null; }

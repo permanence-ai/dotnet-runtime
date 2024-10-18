@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -242,7 +243,7 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(IsWellFormedOriginalString_TestData))]
-        public void IsWellFormedOriginalString(string uriString, bool expected)
+        public void IsWellFormedOriginalString([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, bool expected)
         {
             Uri uri = new Uri(uriString);
             Assert.Equal(expected, uri.IsWellFormedOriginalString());
@@ -272,7 +273,7 @@ namespace System.Tests
         [InlineData("file://C:/directory/filename", UriKind.RelativeOrAbsolute, false)]
         [InlineData("http:\\host/path/file", UriKind.RelativeOrAbsolute, false)]
         [InlineData(null, UriKind.RelativeOrAbsolute, false)]
-        public void IsWellFormedUriString(string uriString, UriKind uriKind, bool expected)
+        public void IsWellFormedUriString([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, UriKind uriKind, bool expected)
         {
             Assert.Equal(expected, Uri.IsWellFormedUriString(uriString, uriKind));
         }

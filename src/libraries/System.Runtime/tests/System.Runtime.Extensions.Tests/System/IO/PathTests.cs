@@ -3,6 +3,7 @@
 
 using Microsoft.DotNet.RemoteExecutor;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Xunit;
 
@@ -524,7 +525,7 @@ namespace System.IO.Tests
         [Theory,
             InlineData("http://www.microsoft.com"),
             InlineData("file://somefile")]
-        public void GetFullPath_URIsAsFileNames(string uriAsFileName)
+        public void GetFullPath_URIsAsFileNames([StringSyntax(StringSyntaxAttribute.Uri)] string uriAsFileName)
         {
             // URIs are valid filenames, though the multiple slashes will be consolidated in GetFullPath
             Assert.Equal(

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Tests;
 using System.Text;
@@ -521,7 +522,7 @@ namespace System.PrivateUri.Tests
         [Theory]
         [InlineData("c:/path/with/unicode/\u00F6/test.xml")]
         [InlineData("file://c:/path/with/unicode/\u00F6/test.xml")]
-        public void Iri_WindowsPathWithUnicode_DoesRemoveScheme(string uriString)
+        public void Iri_WindowsPathWithUnicode_DoesRemoveScheme([StringSyntax(StringSyntaxAttribute.Uri)] string uriString)
         {
             var uri = new Uri(uriString);
             Assert.False(uri.LocalPath.StartsWith("file:"));
@@ -532,7 +533,7 @@ namespace System.PrivateUri.Tests
         [InlineData("http:\u00E8")]
         [InlineData("%C3%A8")]
         [InlineData("\u00E8")]
-        public void Iri_RelativeUriCreation_ShouldNotNormalize(string uriString)
+        public void Iri_RelativeUriCreation_ShouldNotNormalize([StringSyntax(StringSyntaxAttribute.Uri)] string uriString)
         {
             Uri baseIri = new Uri("http://www.contoso.com");
 

@@ -1,7 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using Microsoft.DotNet.XUnitExtensions;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -10,7 +12,6 @@ using System.Runtime;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.DotNet.XUnitExtensions;
 using Xunit;
 
 namespace System.Text.RegularExpressions.Tests
@@ -1166,7 +1167,7 @@ namespace System.Text.RegularExpressions.Tests
 
         [Theory]
         [MemberData(nameof(RealWorld_ExtractResourceUri_MemberData))]
-        public async Task RealWorld_ExtractResourceUri(RegexEngine engine, string url, string expected)
+        public async Task RealWorld_ExtractResourceUri(RegexEngine engine, [StringSyntax(StringSyntaxAttribute.Uri)] string url, string expected)
         {
             Regex r = await RegexHelpers.GetRegexAsync(engine, @"/providers/(.+?)\?");
             Match m = r.Match(url);

@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Xunit;
 
@@ -169,7 +170,7 @@ namespace System.Net.Tests
         [InlineData("http://localhost:9200/")]
         [InlineData("https://localhost:9200/")]
         [InlineData("http://[fe80::70af:5aca:252a:3ca9]/")]
-        public void Add_NotStarted_ReturnsExpected(string uriPrefix)
+        public void Add_NotStarted_ReturnsExpected([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix)
         {
             var listener = new HttpListener();
             listener.Prefixes.Add(uriPrefix);
@@ -360,7 +361,7 @@ namespace System.Net.Tests
         [Theory]
         [MemberData(nameof(InvalidPrefix_TestData))]
         [SkipOnPlatform(TestPlatforms.FreeBSD, "FreeBSD accepts some inputs as valid and test hangs")]
-        public void Add_InvalidPrefixNotStarted_ThrowsHttpListenerExceptionOnStart(string uriPrefix)
+        public void Add_InvalidPrefixNotStarted_ThrowsHttpListenerExceptionOnStart([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix)
         {
             var listener = new HttpListener();
             listener.Prefixes.Add(uriPrefix);
@@ -373,7 +374,7 @@ namespace System.Net.Tests
         [Theory]
         [MemberData(nameof(InvalidPrefix_TestData))]
         [SkipOnPlatform(TestPlatforms.FreeBSD, "FreeBSD accepts some inputs as valid and test hangs")]
-        public void Add_InvalidPrefixAlreadyStarted_ThrowsHttpListenerExceptionOnAdd(string uriPrefix)
+        public void Add_InvalidPrefixAlreadyStarted_ThrowsHttpListenerExceptionOnAdd([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix)
         {
             using (var factory = new HttpListenerFactory())
             {
@@ -396,7 +397,7 @@ namespace System.Net.Tests
         [InlineData("http://localhost:9200")]
         [InlineData("http://localhost/path")]
         [InlineData("http://::/")]
-        public void Add_InvalidPrefix_ThrowsArgumentException(string uriPrefix)
+        public void Add_InvalidPrefix_ThrowsArgumentException([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix)
         {
             var listener = new HttpListener();
             AssertExtensions.Throws<ArgumentException>("uriPrefix", () => listener.Prefixes.Add(uriPrefix));
@@ -445,7 +446,7 @@ namespace System.Net.Tests
         [InlineData("http://localhost:9200")]
         [InlineData("https://localhost:9200/")]
         [InlineData("HTTP://LOCALHOST:9200/")]
-        public void Contains_NoSuchPrefix_ReturnsFalse(string uriPrefix)
+        public void Contains_NoSuchPrefix_ReturnsFalse([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix)
         {
             var listener = new HttpListener();
             listener.Prefixes.Add("http://localhost:9200/");
@@ -493,7 +494,7 @@ namespace System.Net.Tests
         [InlineData("http://localhost:9200")]
         [InlineData("https://localhost:9200/")]
         [InlineData("HTTP://LOCALHOST:9200/")]
-        public void Remove_NoSuchPrefix_ReturnsFalse(string uriPrefix)
+        public void Remove_NoSuchPrefix_ReturnsFalse([StringSyntax(StringSyntaxAttribute.Uri)] string uriPrefix)
         {
             var listener = new HttpListener();
             listener.Prefixes.Add("http://localhost:9200/");

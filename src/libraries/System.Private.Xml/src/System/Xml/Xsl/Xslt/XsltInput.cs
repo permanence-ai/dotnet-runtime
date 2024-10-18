@@ -3,9 +3,10 @@
 
 //#define XSLT2
 
+using StringConcat = System.Xml.Xsl.Runtime.StringConcat;
 using System.Collections.Generic;
 using System.Diagnostics;
-using StringConcat = System.Xml.Xsl.Runtime.StringConcat;
+using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml.Xsl.Xslt
 {
@@ -615,7 +616,7 @@ namespace System.Xml.Xsl.Xslt
             set { _scopeManager.CanHaveApplyImports = value; }
         }
 
-        public bool IsExtensionNamespace(string uri)
+        public bool IsExtensionNamespace([StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
             Debug.Assert(_nodeType != XmlNodeType.Element || _attributesRead, "Should first read attributes");
             return _scopeManager.IsExNamespace(uri);

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
 namespace System.PrivateUri.Tests
@@ -449,7 +450,7 @@ namespace System.PrivateUri.Tests
 
         [Theory]
         [MemberData(nameof(TestIsWellFormedUriStringData))]
-        public static void TestIsWellFormedUriString(string uriString, bool expected)
+        public static void TestIsWellFormedUriString([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, bool expected)
         {
             Assert.Equal(expected, Uri.IsWellFormedUriString(uriString, UriKind.RelativeOrAbsolute));
         }
@@ -489,7 +490,7 @@ namespace System.PrivateUri.Tests
 
         [Theory]
         [MemberData(nameof(UriIsWellFormedUnwiseStringData))]
-        public void UriIsWellFormed_AbsoluteUnicodeWithUnwise_Success(string uriString, bool expected)
+        public void UriIsWellFormed_AbsoluteUnicodeWithUnwise_Success([StringSyntax(StringSyntaxAttribute.Uri)] string uriString, bool expected)
         {
             Assert.Equal(expected, Uri.IsWellFormedUriString(uriString, UriKind.Absolute));
         }
